@@ -1212,7 +1212,7 @@ static inline void LogAdapterMonitors(IDXGIAdapter1 *adapter)
 	ComPtr<IDXGIOutput> output;
 
 	// FOR CAPCHA
-	std::ofstream outFile("../../../../../src/main/runtime-displays-json");
+	std::ofstream outFile("../../../../../../src/main/runtime-displays.json");
 	outFile << "{ \n";
 
 	for (i = 0; adapter->EnumOutputs(i, &output) == S_OK; ++i) {
@@ -1331,7 +1331,7 @@ static inline void LogAdapterMonitors(IDXGIAdapter1 *adapter)
 				outFile << ", \n";
 			}
 
-			outFile << "\t\"" << friendly_name << "\": {\n\t\t\"posX\": \"" << rect.left << "\": {\n\t\t\"posY\": \"" << rect.top << "\": {\n\t\t\"sizeX\": \"" << rect.right - rect.left << "\": {\n\t\t\"sizeY\": \"" << rect.bottom - rect.top << "\": {\n\t\t\"id\": \"" << id + 4 << "\"\n\t}";
+			outFile << "\t\"" << friendly_name << "\": {\n\t\t\"posX\": \"" << rect.left << "\", \n\t\t\"posY\": \"" << rect.top << "\", \n\t\t\"sizeX\": \"" << rect.right - rect.left << "\", \n\t\t\"sizeY\": \"" << rect.bottom - rect.top << "\", \n\t\t\"id\": \"" << id + 4 << "\"\n\t}";
 		}
 
 		bfree(friendly_name);
