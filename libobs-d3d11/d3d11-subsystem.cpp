@@ -1212,7 +1212,7 @@ static inline void LogAdapterMonitors(IDXGIAdapter1 *adapter)
 	ComPtr<IDXGIOutput> output;
 
 	// FOR CAPCHA
-	std::ofstream outFile("../../../../../../src/main/runtime-displays.json");
+	std::ofstream outFile("../../../../../../src/main/monitors.json");
 	outFile << "{ \n";
 
 	for (i = 0; adapter->EnumOutputs(i, &output) == S_OK; ++i) {
