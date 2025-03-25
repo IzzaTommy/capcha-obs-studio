@@ -30,9 +30,6 @@
 #include <shellscalingapi.h>
 #include <d3dkmthk.h>
 
-// FOR CAPCHA
-#include <fstream>
-
 struct UnsupportedHWError : HRError {
 	inline UnsupportedHWError(const char *str, HRESULT hr) : HRError(str, hr) {}
 };
@@ -1211,10 +1208,6 @@ static inline void LogAdapterMonitors(IDXGIAdapter1 *adapter)
 	UINT i;
 	ComPtr<IDXGIOutput> output;
 
-	// FOR CAPCHA
-	std::ofstream outFile("../../../../../../src/main/monitors.json");
-	outFile << "{ \n";
-
 	for (i = 0; adapter->EnumOutputs(i, &output) == S_OK; ++i) {
 		DXGI_OUTPUT_DESC desc;
 		if (FAILED(output->GetDesc(&desc)))
@@ -1324,22 +1317,8 @@ static inline void LogAdapterMonitors(IDXGIAdapter1 *adapter)
 		     gamut_size / DoubleTriangleArea(.68, .32, .265, .69, .15, .060),
 		     gamut_size / DoubleTriangleArea(.708, .292, .17, .797, .131, .046), sdr_white_nits, min_luminance,
 		     max_luminance, max_full_frame_luminance, dpiX, scaling, id, alt_id);
-
-		// FOR CAPCHA
-		if (outFile.is_open()) {
-			if (i > 0) {
-				outFile << ", \n";
-			}
-
-			outFile << "\t\"" << friendly_name << "\": {\n\t\t\"posX\": \"" << rect.left << "\", \n\t\t\"posY\": \"" << rect.top << "\", \n\t\t\"sizeX\": \"" << rect.right - rect.left << "\", \n\t\t\"sizeY\": \"" << rect.bottom - rect.top << "\", \n\t\t\"id\": \"" << id + 4 << "\"\n\t}";
-		}
-
 		bfree(friendly_name);
 	}
-
-	// FOR CAPCHA
-	outFile << "\n}";
-	outFile.close();
 }
 
 static inline double to_GiB(size_t bytes)
