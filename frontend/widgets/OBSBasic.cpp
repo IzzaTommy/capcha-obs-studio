@@ -1181,8 +1181,10 @@ void OBSBasic::OBSInit()
 		config_save_safe(App()->GetUserConfig(), "tmp", nullptr);
 	}
 
-	if (!first_run && !has_last_version && !Active())
-		QMetaObject::invokeMethod(this, "on_autoConfigure_triggered", Qt::QueuedConnection);
+	// Changed by Thomas Joel on 03/25/25
+	// if (!first_run && !has_last_version && !Active())
+		// QMetaObject::invokeMethod(this, "on_autoConfigure_triggered", Qt::QueuedConnection);
+	// End of change
 
 #if (defined(_WIN32) || defined(__APPLE__)) && (OBS_RELEASE_CANDIDATE > 0 || OBS_BETA > 0)
 	/* Automatically set branch to "beta" the first time a pre-release build is run. */
